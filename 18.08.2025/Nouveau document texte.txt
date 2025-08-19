@@ -1,0 +1,179 @@
+
+
+### 2. كود CSS (styles.css)
+
+هذا الكود مسؤول عن تصميم وتنسيق الصفحة.
+
+```css
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    --main-bg-color: rgba(241, 243, 255, 1);
+    --secondary-bg-color: rgba(13, 40, 166, 1);
+    --card-border-color: rgba(208, 208, 208, 1);
+    --button-primary-color: rgba(92, 184, 95, 1);
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+}
+
+nav.navbar {
+    font-weight: bold;
+    background-color: var(--main-bg-color);
+}
+
+.nav-item {
+    text-decoration: none;
+    margin-right: 32px;
+}
+
+.nav-item .nav-link {
+    font-weight: 400;
+    color: black;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.main-section {
+    position: relative;
+    background-color: var(--main-bg-color);
+    padding-top: 80px;
+}
+
+.our-section {
+    background-color: white;
+}
+
+.bg-car {
+    position: absolute;
+    background-color: var(--secondary-bg-color);
+    height: 50%;
+    width: 50%;
+    bottom: 0;
+    right: 0;
+    border-radius: 100px 0 0 0;
+}
+
+#img-car {
+    z-index: 1;
+}
+
+.content-our-section {
+    margin-left: 80px;
+}
+
+ul {
+    list-style: none;
+}
+
+.item-list {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 20px;
+}
+
+.item-list:before {
+    content: "✓";
+    color: var(--button-primary-color);
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.card-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 300px;
+    height: 100%;
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid var(--card-border-color);
+    border-radius: 10px;
+    padding: 24px;
+    transition: transform 0.3s;
+}
+
+.card-item:hover {
+    transform: translateY(-10px);
+}
+
+.card-title {
+    font-size: 16px;
+    margin-top: 16px;
+    font-weight: bold;
+}
+
+.card-desc {
+    font-size: 14px;
+    margin-top: 16px;
+}
+
+.icon-card {
+    width: 32px;
+    height: 32px;
+    margin: 10px 0 0 0;
+}
+
+.text-testimonial {
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+.text-testimonial .tagline-testimonial {
+    margin-top: 16px;
+}
+
+#card-testimonial {
+    display: flex;
+    align-items: center;
+    background-color: var(--main-bg-color);
+    border: 0;
+    border-radius: 10px;
+}
+
+#img-profile {
+    width: 170px;
+    height: 170px;
+}
+
+#faq-section {
+    padding-bottom: 80px;
+    margin-top: 80px;
+}
+
+#footer {
+    background-color: var(--secondary-bg-color);
+    color: white;
+    padding: 40px 0;
+}
+
+.footer-section p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.sosmed i {
+    font-size: 24px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.sosmed i:hover {
+    color: var(--button-primary-color);
+}

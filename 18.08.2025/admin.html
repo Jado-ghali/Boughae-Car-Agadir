@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - BOUGHAE CAR</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="نظام شامل لإدارة تأجير السيارات مع إدارة الأسطول والعملاء والمعاملات المالية">
+    <meta name="theme-color" content="#764ba2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="BOUGHAE CAR">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    
+    <!-- PWA Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik00OCA5NkM0OCA4NC45NTQzIDU2Ljk1NDMgNzYgNjggNzZIMTI0QzEzNS4wNDYgNzYgMTQ0IDg0Ljk1NDMgMTQ0IDk2VjEyOEMxNDQgMTM5LjA0NiAxMzUuMDQ2IDE0OCAxMjQgMTQ4SDY4QzU2Ljk1NDMgMTQ4IDQ4IDEzOS4wNDYgNDggMTI4Vjk2WiIgZmlsbD0id2hpdGUiLz4KPGNpcmNsZSBjeD0iNzIiIGN5PSIxMzIiIHI9IjEyIiBmaWxsPSIjNjY3ZWVhIi8+CjxjaXJjbGUgY3g9IjEyMCIgY3k9IjEzMiIgcj0iMTIiIGZpbGw9IiM2NjdlZWEiLz4KPHJlY3QgeD0iNTYiIHk9Ijg4IiB3aWR0aD0iODAiIGhlaWdodD0iMjQiIHJ4PSI0IiBmaWxsPSIjNzY0YmEyIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSIxOTIiIHkyPSIxOTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iIzY2N2VlYSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3NjRiYTIiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0idXJsKCNncmFkaWVudDBfbGluZWFyXzFfMSkiLz4KPHBhdGggZD0iTTggMTZDOCAxNC4zNDMxIDkuMzQzMTUgMTMgMTEgMTNIMjFDMjIuNjU2OSAxMyAyNCAxNC4zNDMxIDI0IDE2VjIxQzI0IDIyLjY1NjkgMjIuNjU2OSAyNCAyMSAyNEgxMUM5LjM0MzE1IDI0IDggMjIuNjU2OSA4IDIxVjE2WiIgZmlsbD0id2hpdGUiLz4KPGNpcmNsZSBjeD0iMTIiIGN5PSIyMiIgcj0iMiIgZmlsbD0iIzY2N2VlYSIvPgo8Y2lyY2xlIGN4PSIyMCIgY3k9IjIyIiByPSIyIiBmaWxsPSIjNjY3ZWVhIi8+CjxyZWN0IHg9IjkiIHk9IjE1IiB3aWR0aD0iMTQiIGhlaWdodD0iNCIgcng9IjEiIGZpbGw9IiM3NjRiYTIiLz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhcl8xXzEiIHgxPSIwIiB5MT0iMCIgeDI9IjMyIiB5Mj0iMzIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iIzY2N2VlYSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3NjRiYTIiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K">
+    <!-- Bootstrap CSS محلي -->
+    <style>
+        /* Bootstrap CSS مبسط */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .row { display: flex; flex-wrap: wrap; margin: 0 -15px; }
+        .col, .col-md-3, .col-md-4, .col-md-6, .col-md-7, .col-md-8, .col-xl-3, .col-xl-4, .col-xl-8, .col-12 { padding: 0 15px; }
+        .col-md-3 { flex: 0 0 25%; max-width: 25%; }
+        .col-md-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+        .col-md-6 { flex: 0 0 50%; max-width: 50%; }
+        .col-md-7 { flex: 0 0 58.333333%; max-width: 58.333333%; }
+        .col-md-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
+        .col-xl-3 { flex: 0 0 25%; max-width: 25%; }
+        .col-xl-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+        .col-xl-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
+        .col-12 { flex: 0 0 100%; max-width: 100%; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .me-2 { margin-left: 0.5rem; }
+        .text-center { text-align: center; }
+        .text-muted { color: #6c757d; }
+        .text-uppercase { text-transform: uppercase; }
+        .font-weight-bold { font-weight: bold; }
+        .h2 { font-size: 2rem; }
+        .btn { display: inline-block; padding: 0.375rem 0.75rem; margin-bottom: 0; font-size: 1rem; font-weight: 400; line-height: 1.5; text-align: center; text-decoration: none; vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 0.25rem; }
+        .btn-sm { padding: 0.25rem 0.5rem; font-size: 0.875rem; border-radius: 0.2rem; }
+        .table { width: 100%; margin-bottom: 1rem; color: #212529; border-collapse: collapse; }
+        .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6; }
+        .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6; }
+        .table-responsive { display: block; width: 100%; overflow-x: auto; }
+        .table-hover tbody tr:hover { color: #212529; background-color: rgba(0,0,0,.075); }
+        .table-warning { background-color: #fff3cd; }
+        .table-danger { background-color: #f8d7da; }
+        .modal { position: fixed; top: 0; left: 0; z-index: 1050; display: none; width: 100%; height: 100%; overflow: hidden; outline: 0; }
+        .modal.show { display: block; }
+        .modal-dialog { position: relative; width: auto; margin: 0.5rem; pointer-events: none; }
+        .modal-lg { max-width: 800px; }
+        .modal-content { position: relative; display: flex; flex-direction: column; width: 100%; pointer-events: auto; background-color: #fff; background-clip: padding-box; border: 1px solid rgba(0,0,0,.2); border-radius: 0.3rem; outline: 0; }
+        .modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 1rem 1rem; border-bottom: 1px solid #dee2e6; border-top-left-radius: calc(0.3rem - 1px); border-top-right-radius: calc(0.3rem - 1px); }
+        .modal-body { position: relative; flex: 1 1 auto; padding: 1rem; }
+        .modal-footer { display: flex; align-items: center; justify-content: flex-end; padding: 0.75rem; border-top: 1px solid #dee2e6; border-bottom-right-radius: calc(0.3rem - 1px); border-bottom-left-radius: calc(0.3rem - 1px); }
+        .form-control, .form-select { display: block; width: 100%; padding: 0.375rem 0.75rem; font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529; background-color: #fff; background-image: none; border: 1px solid #ced4da; border-radius: 0.25rem; }
+        .form-label { margin-bottom: 0.5rem; }
+        .badge { display: inline-block; padding: 0.35em 0.65em; font-size: 0.75em; font-weight: 700; line-height: 1; color: #fff; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: 0.25rem; }
+        .bg-success { background-color: #198754; }
+        .bg-danger { background-color: #dc3545; }
+        .bg-warning { background-color: #ffc107; color: #000; }
+        .alert { position: relative; padding: 0.75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; border-radius: 0.25rem; }
+        .alert-warning { color: #856404; background-color: #fff3cd; border-color: #ffeaa7; }
+        .alert-info { color: #0c5460; background-color: #d1ecf1; border-color: #bee5eb; }
+        .alert-success { color: #0f5132; background-color: #d1e7dd; border-color: #badbcc; }
+        .btn-close { box-sizing: content-box; width: 1em; height: 1em; padding: 0.25em 0.25em; color: #000; background: transparent; border: 0; border-radius: 0.25rem; opacity: 0.5; cursor: pointer; }
+        .align-items-center { align-items: center; }
+        .justify-content-space-between { justify-content: space-between; }
+        .d-flex { display: flex; }
+        .gap-15 { gap: 15px; }
+    </style>
+    
+    <!-- Bootstrap Icons محلي -->
+    <style>
+        .bi::before { display: inline-block; content: ""; }
+        .bi-speedometer2::before { content: "⚡"; }
+        .bi-car-front::before { content: "🚗"; }
+        .bi-people::before { content: "👥"; }
+        .bi-graph-up::before { content: "📈"; }
+        .bi-bell::before { content: "🔔"; }
+        .bi-gear::before { content: "⚙️"; }
+        .bi-list::before { content: "☰"; }
+        .bi-person-circle::before { content: "👤"; }
+        .bi-plus-circle::before { content: "➕"; }
+        .bi-search::before { content: "🔍"; }
+        .bi-pencil::before { content: "✏️"; }
+        .bi-trash::before { content: "🗑️"; }
+        .bi-check-circle::before { content: "✅"; }
+        .bi-currency-dollar::before { content: "💰"; }
+        .bi-exclamation-triangle::before { content: "⚠️"; }
+        .bi-info-circle::before { content: "ℹ️"; }
+    </style>
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <!-- الشريط الجانبي -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>BOUGHAE CAR</h3>
+            <p class="text-muted">لوحة التحكم</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-item active" data-page="dashboard">
+                <i class="bi bi-speedometer2"></i>
+                <span data-translate="dashboard">الرئيسية</span>
+            </li>
+            <li class="menu-item" data-page="fleet">
+                <i class="bi bi-car-front"></i>
+                <span data-translate="fleet">إدارة الأسطول</span>
+            </li>
+            <li class="menu-item" data-page="customers">
+                <i class="bi bi-people"></i>
+                <span data-translate="customers">العملاء</span>
+            </li>
+            <li class="menu-item" data-page="rental">
+                <i class="bi bi-calendar-check"></i>
+                <span data-translate="rental">كراء السيارات</span>
+            </li>
+            <li class="menu-item" data-page="finance">
+                <i class="bi bi-graph-up"></i>
+                <span data-translate="finance">الإيرادات والمصاريف</span>
+            </li>
+            <li class="menu-item" data-page="alerts">
+                <i class="bi bi-bell"></i>
+                <span data-translate="alerts">التنبيهات</span>
+            </li>
+            <li class="menu-item" data-page="settings">
+                <i class="bi bi-gear"></i>
+                <span data-translate="settings">الإعدادات</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content" id="main-content">
+        <!-- شريط التنقل العلوي -->
+        <nav class="top-navbar">
+            <div class="navbar-content">
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="navbar-right">
+                    <div class="language-switcher me-3">
+                        <button class="btn btn-outline-primary btn-sm" onclick="changeLanguage('ar')" id="btn-ar">العربية</button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="changeLanguage('en')" id="btn-en">English</button>
+                    </div>
+                    <div class="user-info">
+                        <i class="bi bi-person-circle"></i>
+                        <span data-translate="welcome">مرحباً، المدير</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- محتوى الصفحات -->
+        <div class="page-content">
+            <!-- صفحة الرئيسية -->
+            <div class="page active" id="dashboard-page">
+                <div class="page-header">
+                    <h2 data-translate="dashboardTitle">لوحة التحكم الرئيسية</h2>
+                    <p class="text-muted" data-translate="dashboardSubtitle">نظرة عامة على أداء الشركة</p>
+                </div>
+
+                <!-- البطاقات الإحصائية -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0" data-translate="totalCars">إجمالي السيارات</h5>
+                                        <span class="h2 font-weight-bold mb-0" id="total-cars">25</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                                            <i class="bi bi-car-front"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0" data-translate="rentedCars">السيارات المؤجرة</h5>
+                                        <span class="h2 font-weight-bold mb-0" id="rented-cars">18</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+                                            <i class="bi bi-check-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0" data-translate="activeCustomers">العملاء النشطين</h5>
+                                        <span class="h2 font-weight-bold mb-0" id="active-customers">142</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0" data-translate="monthlyRevenue">الإيرادات الشهرية</h5>
+                                        <span class="h2 font-weight-bold mb-0" id="monthly-revenue">45,250 د.م</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                                            <i class="bi bi-currency-dollar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الرسوم البيانية والجداول -->
+                <div class="row">
+                    <div class="col-xl-8 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0" data-translate="monthlyRevenue">الإيرادات الشهرية</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="revenueChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">حالة الأسطول</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="fleetChart" width="300" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- التنبيهات الحديثة -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">التنبيهات الحديثة</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-warning" role="alert">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>
+                                    سيارة تويوتا كامري (رقم اللوحة: أ ب ج 123) - ينتهي التأمين خلال 5 أيام
+                                </div>
+                                <div class="alert alert-info" role="alert">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    سيارة هونداي إلنترا (رقم اللوحة: د هـ و 456) - موعد الفحص الفني خلال أسبوعين
+                                </div>
+                                <div class="alert alert-success" role="alert">
+                                    <i class="bi bi-check-circle me-2"></i>
+                                    تم إضافة عميل جديد: أحمد محمد علي
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- صفحة إدارة الأسطول -->
+            <div class="page" id="fleet-page">
+                <div class="page-header">
+                    <h2 data-translate="fleetManagement">إدارة الأسطول</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCarModal">
+                        <i class="bi bi-plus-circle me-2"></i><span data-translate="addNewCar">إضافة سيارة جديدة</span>
+                    </button>
+                </div>
+
+                <!-- فلاتر البحث -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" placeholder="البحث برقم اللوحة" id="search-plate">
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" id="filter-brand">
+                                    <option value="">جميع الماركات</option>
+                                    <option value="toyota">تويوتا</option>
+                                    <option value="hyundai">هيونداي</option>
+                                    <option value="nissan">نيسان</option>
+                                    <option value="honda">هوندا</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" id="filter-status">
+                                    <option value="">جميع الحالات</option>
+                                    <option value="available">متاحة</option>
+                                    <option value="rented">مؤجرة</option>
+                                    <option value="maintenance">صيانة</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-outline-primary w-100" onclick="filterCars()">
+                                    <i class="bi bi-search me-2"></i>بحث
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول السيارات -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="cars-table">
+                                <thead>
+                                    <tr>
+                                        <th>الصورة</th>
+                                        <th data-translate="plateNumber">رقم اللوحة</th>
+                                        <th>الماركة والموديل</th>
+                                        <th data-translate="year">السنة</th>
+                                        <th data-translate="status">الحالة</th>
+                                        <th data-translate="dailyPrice">السعر اليومي</th>
+                                        <th data-translate="actions">الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cars-tbody">
+                                    <!-- سيتم ملء البيانات بواسطة JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- صفحة العملاء -->
+            <div class="page" id="customers-page">
+                <div class="page-header">
+                    <h2 data-translate="customersManagement">إدارة العملاء</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+                        <i class="bi bi-plus-circle me-2"></i><span data-translate="addNewCustomer">إضافة عميل جديد</span>
+                    </button>
+                </div>
+
+                <!-- فلاتر البحث -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="البحث بالاسم" id="search-customer-name">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="البحث برقم الهاتف" id="search-customer-phone">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-primary w-100" onclick="filterCustomers()">
+                                    <i class="bi bi-search me-2"></i>بحث
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول العملاء -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="customers-table">
+                                <thead>
+                                    <tr>
+                                        <th data-translate="customerName">الاسم</th>
+                                        <th data-translate="phone">رقم الهاتف</th>
+                                        <th data-translate="email">البريد الإلكتروني</th>
+                                        <th data-translate="idNumber">رقم الهوية</th>
+                                        <th data-translate="registrationDate">تاريخ التسجيل</th>
+                                        <th data-translate="bookingsCount">عدد الحجوزات</th>
+                                        <th data-translate="actions">الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customers-tbody">
+                                    <!-- سيتم ملء البيانات بواسطة JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- صفحة كراء السيارات -->
+            <div class="page" id="rental-page">
+                <div class="page-header">
+                    <h2 data-translate="rentalManagement">إدارة كراء السيارات</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRentalModal">
+                        <i class="bi bi-plus-circle me-2"></i><span data-translate="addNewRental">إضافة كراء جديد</span>
+                    </button>
+                </div>
+
+                <!-- فلاتر البحث -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" placeholder="البحث بالعميل" id="search-rental-customer">
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" id="filter-rental-status">
+                                    <option value="">جميع الحالات</option>
+                                    <option value="active">نشط</option>
+                                    <option value="completed">مكتمل</option>
+                                    <option value="cancelled">ملغي</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="date" class="form-control" id="filter-rental-date">
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-outline-primary w-100" onclick="filterRentals()">
+                                    <i class="bi bi-search me-2"></i><span data-translate="search">بحث</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- إحصائيات سريعة -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-primary" data-translate="activeRentals">الكراءات النشطة</h5>
+                                <h3 class="text-primary" id="active-rentals-count">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-success" data-translate="completedRentals">الكراءات المكتملة</h5>
+                                <h3 class="text-success" id="completed-rentals-count">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-info" data-translate="todayRevenue">إيرادات اليوم</h5>
+                                <h3 class="text-info" id="today-revenue">0 د.م</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-warning" data-translate="monthlyRevenue">الإيرادات الشهرية</h5>
+                                <h3 class="text-warning" id="rental-monthly-revenue">0 د.م</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول الكراءات -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="rentals-table">
+                                <thead>
+                                    <tr>
+                                        <th data-translate="rentalId">رقم الكراء</th>
+                                        <th data-translate="customerName">العميل</th>
+                                        <th data-translate="carInfo">السيارة</th>
+                                        <th data-translate="startDate">تاريخ البداية</th>
+                                        <th data-translate="endDate">تاريخ النهاية</th>
+                                        <th data-translate="totalDays">عدد الأيام</th>
+                                        <th data-translate="totalAmount">المبلغ الإجمالي</th>
+                                        <th data-translate="status">الحالة</th>
+                                        <th data-translate="actions">الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rentals-tbody">
+                                    <!-- سيتم ملء البيانات بواسطة JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- صفحة الإيرادات والمصاريف -->
+            <div class="page" id="finance-page">
+                <div class="page-header">
+                    <h2 data-translate="financeManagement">الإيرادات والمصاريف</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransactionModal">
+                        <i class="bi bi-plus-circle me-2"></i><span data-translate="addTransaction">إضافة معاملة</span>
+                    </button>
+                </div>
+
+                <!-- ملخص مالي -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title text-success" data-translate="totalIncome">إجمالي الإيرادات</h5>
+                                <h3 class="text-success" id="total-income">125,750 د.م</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title text-danger">إجمالي المصاريف</h5>
+                                <h3 class="text-danger" id="total-expenses">45,200 د.م</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">صافي الربح</h5>
+                                <h3 class="text-primary" id="net-profit">80,550 د.م</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول المعاملات -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="transactions-table">
+                                <thead>
+                                    <tr>
+                                        <th>التاريخ</th>
+                                        <th>النوع</th>
+                                        <th>الوصف</th>
+                                        <th>المبلغ</th>
+                                        <th>الفئة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactions-tbody">
+                                    <!-- سيتم ملء البيانات بواسطة JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- صفحة التنبيهات -->
+            <div class="page" id="alerts-page">
+                <div class="page-header">
+                    <h2>التنبيهات والتذكيرات</h2>
+                </div>
+
+                <!-- تنبيهات التأمين -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">تنبيهات التأمين</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>رقم اللوحة</th>
+                                        <th>الماركة والموديل</th>
+                                        <th>تاريخ انتهاء التأمين</th>
+                                        <th>الأيام المتبقية</th>
+                                        <th>الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="insurance-alerts-tbody">
+                                    <!-- سيتم ملء البيانات بواسطة JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تنبيهات الفحص الفني -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">تنبيهات الفحص الفني</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>رقم اللوحة</th>
+                                        <th>الماركة والموديل</th>
+                                        <th>تاريخ انتهاء الفحص</th>
+                                        <th>الأيام المتبقية</th>
+                                        <th>الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inspection-alerts-tbody">
+                                    <!-- سيتم ملء البيانات بواسطة JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- صفحة الإعدادات -->
+            <div class="page" id="settings-page">
+                <div class="page-header">
+                    <h2>الإعدادات</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5>إعدادات عامة</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="company-name" class="form-label">اسم الشركة</label>
+                                <input type="text" class="form-control" id="company-name" value="BOUGHAE CAR">
+                            </div>
+                            <div class="mb-3">
+                                <label for="company-phone" class="form-label">رقم الهاتف</label>
+                                <input type="text" class="form-control" id="company-phone" value="+966 12 345 6789">
+                            </div>
+                            <div class="mb-3">
+                                <label for="company-email" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="company-email" value="boughaecar@email.com">
+                            </div>
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal إضافة سيارة -->
+    <div class="modal fade" id="addCarModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إضافة سيارة جديدة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-car-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="car-plate" class="form-label">رقم اللوحة</label>
+                                    <input type="text" class="form-control" id="car-plate" placeholder="مثال: 12345 أ 16" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="car-brand" class="form-label">الماركة</label>
+                                    <input type="text" class="form-control" id="car-brand" placeholder="أدخل الماركة (مثل: تويوتا، هيونداي، نيسان)" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="car-model" class="form-label">الموديل</label>
+                                    <input type="text" class="form-control" id="car-model" placeholder="مثال: كامري، إلنترا، التيما" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="car-year" class="form-label">سنة الصنع</label>
+                                    <input type="number" class="form-control" id="car-year" min="2000" max="2025" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="car-price" class="form-label">السعر اليومي (د.م)</label>
+                                    <input type="number" class="form-control" id="car-price" min="0" placeholder="مثال: 300" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="car-status" class="form-label">الحالة</label>
+                                    <select class="form-select" id="car-status" required>
+                                        <option value="available">متاحة</option>
+                                        <option value="rented">مؤجرة</option>
+                                        <option value="maintenance">صيانة</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="car-image" class="form-label">صورة السيارة</label>
+                            <input type="file" class="form-control" id="car-image" accept="image/*">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="insurance-expiry" class="form-label">تاريخ انتهاء التأمين</label>
+                                    <input type="date" class="form-control" id="insurance-expiry" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="inspection-expiry" class="form-label">تاريخ انتهاء الفحص الفني</label>
+                                    <input type="date" class="form-control" id="inspection-expiry" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="addCar()">إضافة السيارة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal إضافة عميل -->
+    <div class="modal fade" id="addCustomerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إضافة عميل جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-customer-form">
+                        <div class="mb-3">
+                            <label for="customer-name" class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-control" id="customer-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-phone" class="form-label">رقم الهاتف</label>
+                            <input type="tel" class="form-control" id="customer-phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-email" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="customer-email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-id" class="form-label">رقم الهوية</label>
+                            <input type="text" class="form-control" id="customer-id" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-address" class="form-label">العنوان</label>
+                            <textarea class="form-control" id="customer-address" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="addCustomer()">إضافة العميل</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal إضافة معاملة -->
+    <div class="modal fade" id="addTransactionModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إضافة معاملة مالية</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-transaction-form">
+                        <div class="mb-3">
+                            <label for="transaction-type" class="form-label">نوع المعاملة</label>
+                            <select class="form-select" id="transaction-type" required>
+                                <option value="">اختر النوع</option>
+                                <option value="income">إيراد</option>
+                                <option value="expense">مصروف</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transaction-amount" class="form-label">المبلغ (د.م)</label>
+                            <input type="number" class="form-control" id="transaction-amount" min="0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transaction-description" class="form-label">الوصف</label>
+                            <input type="text" class="form-control" id="transaction-description" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transaction-category" class="form-label">الفئة</label>
+                            <select class="form-select" id="transaction-category" required>
+                                <option value="">اختر الفئة</option>
+                                <option value="rental">إيجار سيارات</option>
+                                <option value="maintenance">صيانة</option>
+                                <option value="fuel">وقود</option>
+                                <option value="insurance">تأمين</option>
+                                <option value="other">أخرى</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transaction-date" class="form-label">التاريخ</label>
+                            <input type="date" class="form-control" id="transaction-date" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="addTransaction()">إضافة المعاملة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal إضافة كراء -->
+    <div class="modal fade" id="addRentalModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" data-translate="addNewRental">إضافة كراء جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-rental-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="rental-customer" class="form-label" data-translate="customerName">العميل</label>
+                                    <select class="form-select" id="rental-customer" required>
+                                        <option value="">اختر العميل</option>
+                                        <!-- سيتم ملء القائمة بواسطة JavaScript -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="rental-car" class="form-label">السيارة</label>
+                                    <select class="form-select" id="rental-car" required>
+                                        <option value="">اختر السيارة</option>
+                                        <!-- سيتم ملء القائمة بواسطة JavaScript -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="rental-start-date" class="form-label" data-translate="startDate">تاريخ البداية</label>
+                                    <input type="date" class="form-control" id="rental-start-date" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="rental-end-date" class="form-label" data-translate="endDate">تاريخ النهاية</label>
+                                    <input type="date" class="form-control" id="rental-end-date" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="rental-days" class="form-label" data-translate="totalDays">عدد الأيام</label>
+                                    <input type="number" class="form-control" id="rental-days" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="rental-daily-price" class="form-label">السعر اليومي (د.م)</label>
+                                    <input type="number" class="form-control" id="rental-daily-price" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="rental-total-amount" class="form-label" data-translate="totalAmount">المبلغ الإجمالي (د.م)</label>
+                                    <input type="number" class="form-control" id="rental-total-amount" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="rental-deposit" class="form-label">مبلغ التأمين (د.م)</label>
+                                    <input type="number" class="form-control" id="rental-deposit" min="0" placeholder="مثال: 500">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="rental-payment-method" class="form-label">طريقة الدفع</label>
+                                    <select class="form-select" id="rental-payment-method" required>
+                                        <option value="">اختر طريقة الدفع</option>
+                                        <option value="cash">نقداً</option>
+                                        <option value="card">بطاقة ائتمان</option>
+                                        <option value="bank_transfer">تحويل بنكي</option>
+                                        <option value="check">شيك</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rental-notes" class="form-label">ملاحظات</label>
+                            <textarea class="form-control" id="rental-notes" rows="3" placeholder="أي ملاحظات إضافية..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="cancel">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="addRental()" data-translate="save">حفظ الكراء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal كراء سريع -->
+    <div class="modal fade" id="quickRentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">كراء سريع للسيارة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="quick-rent-form">
+                        <input type="hidden" id="quick-rent-car-id">
+                        
+                        <!-- معلومات السيارة -->
+                        <div class="alert alert-info">
+                            <strong>السيارة المختارة:</strong>
+                            <span id="quick-rent-car-info"></span>
+                        </div>
+                        
+                        <!-- اختيار العميل -->
+                        <div class="mb-3">
+                            <label for="quick-rent-customer" class="form-label">العميل *</label>
+                            <select class="form-select" id="quick-rent-customer" required>
+                                <option value="">اختر العميل</option>
+                                <!-- سيتم ملء القائمة بواسطة JavaScript -->
+                            </select>
+                        </div>
+                        
+                        <!-- التواريخ -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="quick-rent-start-date" class="form-label">تاريخ البداية *</label>
+                                    <input type="date" class="form-control" id="quick-rent-start-date" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="quick-rent-end-date" class="form-label">تاريخ النهاية *</label>
+                                    <input type="date" class="form-control" id="quick-rent-end-date" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الحسابات -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="quick-rent-days" class="form-label">عدد الأيام</label>
+                                    <input type="number" class="form-control" id="quick-rent-days" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="quick-rent-daily-price" class="form-label">السعر اليومي (د.م)</label>
+                                    <input type="number" class="form-control" id="quick-rent-daily-price" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="quick-rent-total-amount" class="form-label">المبلغ الإجمالي (د.م)</label>
+                                    <input type="number" class="form-control" id="quick-rent-total-amount" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- طريقة الدفع -->
+                        <div class="mb-3">
+                            <label for="quick-rent-payment-method" class="form-label">طريقة الدفع *</label>
+                            <select class="form-select" id="quick-rent-payment-method" required>
+                                <option value="">اختر طريقة الدفع</option>
+                                <option value="cash">نقداً</option>
+                                <option value="card">بطاقة ائتمان</option>
+                                <option value="bank_transfer">تحويل بنكي</option>
+                                <option value="check">شيك</option>
+                            </select>
+                        </div>
+                        
+                        <!-- مبلغ التأمين -->
+                        <div class="mb-3">
+                            <label for="quick-rent-deposit" class="form-label">مبلغ التأمين (د.م)</label>
+                            <input type="number" class="form-control" id="quick-rent-deposit" min="0" placeholder="اختياري">
+                        </div>
+                        
+                        <!-- ملاحظات -->
+                        <div class="mb-3">
+                            <label for="quick-rent-notes" class="form-label">ملاحظات</label>
+                            <textarea class="form-control" id="quick-rent-notes" rows="2" placeholder="أي ملاحظات إضافية..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-success" onclick="processQuickRental()">
+                        <i class="bi bi-check-circle me-2"></i>تأكيد الكراء
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS محلي مبسط -->
+    <script>
+        // Bootstrap Modal محلي مبسط
+        class SimpleModal {
+            constructor(element) {
+                this.element = element;
+                this.backdrop = null;
+            }
+            
+            show() {
+                this.element.style.display = 'block';
+                this.element.classList.add('show');
+                this.createBackdrop();
+            }
+            
+            hide() {
+                this.element.style.display = 'none';
+                this.element.classList.remove('show');
+                this.removeBackdrop();
+            }
+            
+            createBackdrop() {
+                this.backdrop = document.createElement('div');
+                this.backdrop.className = 'modal-backdrop';
+                this.backdrop.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1040;';
+                document.body.appendChild(this.backdrop);
+                
+                this.backdrop.addEventListener('click', () => this.hide());
+            }
+            
+            removeBackdrop() {
+                if (this.backdrop) {
+                    document.body.removeChild(this.backdrop);
+                    this.backdrop = null;
+                }
+            }
+            
+            static getInstance(element) {
+                if (!element._modalInstance) {
+                    element._modalInstance = new SimpleModal(element);
+                }
+                return element._modalInstance;
+            }
+        }
+        
+        // إضافة مستمعي الأحداث للـ modals
+        document.addEventListener('DOMContentLoaded', function() {
+            // أزرار فتح الـ modals
+            document.querySelectorAll('[data-bs-toggle="modal"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-bs-target');
+                    const modal = document.querySelector(targetId);
+                    if (modal) {
+                        SimpleModal.getInstance(modal).show();
+                    }
+                });
+            });
+            
+            // أزرار إغلاق الـ modals
+            document.querySelectorAll('.btn-close, [data-bs-dismiss="modal"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    if (modal) {
+                        SimpleModal.getInstance(modal).hide();
+                    }
+                });
+            });
+        });
+        
+        // بديل Chart.js محلي مبسط
+        class SimpleChart {
+            constructor(ctx, config) {
+                this.canvas = ctx.canvas;
+                this.ctx = ctx;
+                this.config = config;
+                this.draw();
+            }
+            
+            draw() {
+                const canvas = this.canvas;
+                const ctx = this.ctx;
+                
+                // مسح الـ canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                if (this.config.type === 'line') {
+                    this.drawLineChart();
+                } else if (this.config.type === 'doughnut') {
+                    this.drawDoughnutChart();
+                }
+            }
+            
+            drawLineChart() {
+                const ctx = this.ctx;
+                const canvas = this.canvas;
+                const data = this.config.data;
+                
+                // رسم خطوط بسيطة
+                ctx.strokeStyle = '#3498db';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                
+                const width = canvas.width - 60;
+                const height = canvas.height - 60;
+                const stepX = width / (data.labels.length - 1);
+                
+                data.datasets[0].data.forEach((value, index) => {
+                    const x = 30 + index * stepX;
+                    const y = height - (value / Math.max(...data.datasets[0].data)) * (height - 60) + 30;
+                    
+                    if (index === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                });
+                
+                ctx.stroke();
+                
+                // إضافة نص بسيط
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('الإيرادات الشهرية', canvas.width / 2, 20);
+            }
+            
+            drawDoughnutChart() {
+                const ctx = this.ctx;
+                const canvas = this.canvas;
+                const data = this.config.data;
+                
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radius = Math.min(centerX, centerY) - 20;
+                
+                let total = data.datasets[0].data.reduce((sum, value) => sum + value, 0);
+                let currentAngle = -Math.PI / 2;
+                
+                data.datasets[0].data.forEach((value, index) => {
+                    const sliceAngle = (value / total) * 2 * Math.PI;
+                    
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                    ctx.arc(centerX, centerY, radius * 0.6, currentAngle + sliceAngle, currentAngle, true);
+                    ctx.closePath();
+                    
+                    ctx.fillStyle = data.datasets[0].backgroundColor[index];
+                    ctx.fill();
+                    
+                    currentAngle += sliceAngle;
+                });
+                
+                // إضافة نص بسيط
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('حالة الأسطول', centerX, centerY);
+            }
+        }
+        
+        // تعريف Chart كبديل محلي
+        window.Chart = SimpleChart;
+        window.bootstrap = {
+            Modal: {
+                getInstance: SimpleModal.getInstance
+            }
+        };
+    </script>
+    <script src="admin-script.js"></script>
+    
+    <!-- PWA Service Worker -->
+    <script>
+        // تسجيل Service Worker للـ PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker مسجل بنجاح:', registration.scope);
+                        
+                        // التحقق من وجود تحديثات
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // إظهار رسالة تحديث
+                                    if (confirm('يتوفر تحديث جديد للتطبيق. هل تريد إعادة التحميل؟')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log('❌ فشل تسجيل Service Worker:', error);
+                    });
+            });
+        }
+
+        // إضافة زر تثبيت التطبيق
+        let deferredPrompt;
+        const installButton = document.createElement('button');
+        installButton.textContent = '📱 تثبيت التطبيق';
+        installButton.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            z-index: 1000;
+            display: none;
+            transition: all 0.3s ease;
+        `;
+
+        installButton.addEventListener('mouseover', () => {
+            installButton.style.transform = 'translateY(-2px)';
+            installButton.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
+        });
+
+        installButton.addEventListener('mouseout', () => {
+            installButton.style.transform = 'translateY(0)';
+            installButton.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.3)';
+        });
+
+        document.body.appendChild(installButton);
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`نتيجة التثبيت: ${outcome}`);
+                deferredPrompt = null;
+                installButton.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('✅ تم تثبيت التطبيق بنجاح!');
+            installButton.style.display = 'none';
+        });
+
+        // إضافة إشعار ترحيبي للـ PWA
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('🚀 التطبيق يعمل في وضع standalone');
+            
+            // إضافة رسالة ترحيب
+            setTimeout(() => {
+                const welcomeToast = document.createElement('div');
+                welcomeToast.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: linear-gradient(135deg, #667eea, #764ba2);
+                        color: white;
+                        padding: 15px 20px;
+                        border-radius: 10px;
+                        font-family: 'Cairo', sans-serif;
+                        font-weight: 600;
+                        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+                        z-index: 1001;
+                        animation: slideIn 0.5s ease-out;
+                    ">
+                        🎉 مرحباً بك في تطبيق BOUGHAE CAR!
+                    </div>
+                `;
+                
+                document.body.appendChild(welcomeToast);
+                
+                setTimeout(() => {
+                    welcomeToast.remove();
+                }, 3000);
+            }, 1000);
+        }
+    </script>
+    
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</body>
+</html>
