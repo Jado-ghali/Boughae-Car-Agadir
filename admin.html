@@ -416,9 +416,17 @@
             <div class="page" id="rental-page">
                 <div class="page-header">
                     <h2 data-translate="rentalManagement">إدارة كراء السيارات</h2>
-                    <button class="btn btn-primary" onclick="openAddRentalModal()">
-                        <i class="bi bi-plus-circle me-2"></i><span data-translate="addNewRental">إضافة كراء جديد</span>
-                    </button>
+                    <div>
+                        <button class="btn btn-primary" onclick="openAddRentalModal()">
+                            <i class="bi bi-plus-circle me-2"></i><span data-translate="addNewRental">إضافة كراء جديد</span>
+                        </button>
+                        <button class="btn btn-outline-secondary ms-2" onclick="window.fixCustomerInputField && window.fixCustomerInputField()" title="إصلاح حقل العميل">
+                            🔧 إصلاح حقل العميل
+                        </button>
+                        <button class="btn btn-outline-info ms-2" onclick="testNewCustomerAddition()" title="اختبار إضافة عميل جديد">
+                            🧪 اختبار العميل الجديد
+                        </button>
+                    </div>
                 </div>
 
                 <!-- فلاتر البحث -->
@@ -849,11 +857,24 @@
                                 <div class="mb-3">
                                     <label for="rental-customer" class="form-label" data-translate="customerName">العميل</label>
                                     <div class="customer-input-container">
-                                        <input type="text" class="form-control" id="rental-customer" list="customers-list" placeholder="اكتب اسم العميل أو اختر من القائمة" required>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="rental-customer" 
+                                               list="customers-list" 
+                                               placeholder="اكتب اسم العميل أو اختر من القائمة" 
+                                               autocomplete="off"
+                                               spellcheck="false"
+                                               style="pointer-events: auto !important; user-select: text !important; cursor: text !important; background-color: #fff !important;"
+                                               onfocus="this.style.backgroundColor='#fff'; console.log('تم التركيز على حقل العميل');"
+                                               oninput="console.log('تم إدخال نص:', this.value);"
+                                               required>
                                         <datalist id="customers-list">
                                             <!-- سيتم ملء القائمة بواسطة JavaScript -->
                                         </datalist>
                                         <small class="form-text text-muted">يمكنك كتابة اسم عميل جديد أو اختيار من العملاء الموجودين</small>
+                                        <button type="button" class="btn btn-sm btn-outline-warning mt-1" onclick="testCustomerInput()" title="اختبار الحقل">
+                                            🔧 اختبار الحقل
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1204,6 +1225,7 @@
         };
     </script>
     <script src="admin-script.js"></script>
+    <script src="customer-input-fix.js"></script>
     
     <!-- PWA Service Worker -->
     <script>

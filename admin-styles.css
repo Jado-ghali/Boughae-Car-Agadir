@@ -1244,6 +1244,50 @@ datalist {
     box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
 }
 
+/* إصلاح مشكلة عدم القدرة على الكتابة في حقل العميل */
+#rental-customer {
+    pointer-events: auto !important;
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    cursor: text !important;
+}
+
+#rental-customer:not([readonly]):not([disabled]) {
+    background-color: #fff !important;
+    opacity: 1 !important;
+}
+
+/* التأكد من أن الحقل قابل للتحرير */
+#rental-customer[readonly],
+#rental-customer[disabled] {
+    pointer-events: none;
+    background-color: #e9ecef;
+    opacity: 0.6;
+}
+
+/* إزالة أي تأثيرات قد تمنع الكتابة */
+#rental-customer::-webkit-input-placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+#rental-customer::-moz-placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+#rental-customer:-ms-input-placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+#rental-customer::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
 /* تحسين عرض النماذج المنبثقة */
 .modal {
     position: fixed;

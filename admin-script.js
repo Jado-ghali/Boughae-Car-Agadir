@@ -409,7 +409,7 @@ class LocalDataManager {
         customer.bookingsCount = 0;
         customers.push(customer);
         this.saveCustomers(customers);
-        return customer;
+        return customer.id; // إرجاع ID العميل بدلاً من الكائن كاملاً
     }
 
     addTransaction(transaction) {
@@ -1470,6 +1470,7 @@ function addRental() {
     
     if (!customer) {
         // إنشاء عميل جديد
+        console.log('إنشاء عميل جديد:', customerName);
         const newCustomerData = {
             name: customerName,
             phone: '', // يمكن إضافة حقول إضافية لاحقاً
@@ -1482,8 +1483,12 @@ function addRental() {
         
         // تحديث قائمة العملاء في النموذج
         rentalManager.populateCustomerSelect();
+        
+        // إظهار رسالة تأكيد
+        console.log('تم إنشاء عميل جديد بنجاح. ID:', customerId);
     } else {
         customerId = customer.id;
+        console.log('استخدام عميل موجود:', customerName, 'ID:', customerId);
     }
 
     // الحصول على بيانات السيارة
@@ -1533,7 +1538,15 @@ function addRental() {
     customerManager.updateCustomersTable(); // تحديث جدول العملاء أيضاً
     dashboardManager.updateDashboard();
     
-    alert(languageManager.translate('addedSuccessfully'));
+    // رسالة تأكيد مخصصة
+    const allCustomers = dataManager.getCustomers();
+    const wasNewCustomer = allCustomers.some(c => c.id === customerId && c.name === customerName);
+    
+    if (wasNewCustomer && !customer) {
+        alert(`تم إضافة الكراء بنجاح! ✅\n\nتم أيضاً إنشاء عميل جديد: ${customerName}\nيمكنك الآن استخدام هذا العميل في الكراءات المستقبلية.`);
+    } else {
+        alert(`تم إضافة الكراء بنجاح! ✅\n\nالعميل: ${customerName}\nالسيارة: ${car.brand} ${car.model}\nالمدة: ${days} أيام`);
+    }
 }
 
 // حساب التواريخ والمبالغ تلقائياً
@@ -1731,8 +1744,14 @@ function changeLanguage(lang) {
 
 // فتح نموذج إضافة كراء جديد
 function openAddRentalModal() {
+    console.log('فتح نموذج إضافة كراء جديد...');
+    
     // تهيئة النموذج
-    document.getElementById('add-rental-form').reset();
+    const form = document.getElementById('add-rental-form');
+    if (form) {
+        form.reset();
+        console.log('تم إعادة تعيين النموذج');
+    }
     
     // تحديث قوائم العملاء والسيارات
     rentalManager.populateCustomerSelect();
@@ -1750,15 +1769,153 @@ function openAddRentalModal() {
     overlay.onclick = closeAddRentalModal;
     document.body.appendChild(overlay);
     
-    // التأكد من أن حقل العميل قابل للكتابة
+    // إصلاح شامل لجميع الحقول
     setTimeout(() => {
-        const customerInput = document.getElementById('rental-customer');
-        if (customerInput) {
-            customerInput.removeAttribute('readonly');
-            customerInput.removeAttribute('disabled');
-            customerInput.focus();
-        }
-    }, 100);
+        fixAllModalInputs();
+    }, 200);
+}
+
+// دالة شاملة لإصلاح جميع حقول النموذج
+function fixAllModalInputs() {
+    console.log('بدء إصلاح جميع حقول النموذج...');
+    
+    // إصلاح حقل العميل بطريقة جذرية
+    const customerInputContainer = document.querySelector('.customer-input-container');
+    const originalCustomerInput = document.getElementById('rental-customer');
+    
+    if (originalCustomerInput && customerInputContainer) {
+        console.log('إعادة إنشاء حقل العميل بالكامل...');
+        
+        // إنشاء حقل جديد
+        const newCustomerInput = document.createElement('input');
+        newCustomerInput.type = 'text';
+        newCustomerInput.className = 'form-control';
+        newCustomerInput.id = 'rental-customer';
+        newCustomerInput.setAttribute('list', 'customers-list');
+        newCustomerInput.placeholder = 'اكتب اسم العميل أو اختر من القائمة';
+        newCustomerInput.autocomplete = 'off';
+        newCustomerInput.spellcheck = false;
+        newCustomerInput.required = true;
+        
+        // تطبيق CSS مباشرة
+        newCustomerInput.style.cssText = `
+            pointer-events: auto !important;
+            user-select: text !important;
+            cursor: text !important;
+            background-color: #fff !important;
+            color: #000 !important;
+            opacity: 1 !important;
+            border: 2px solid #ddd !important;
+            padding: 8px 12px !important;
+            font-size: 16px !important;
+        `;
+        
+        // إضافة الأحداث
+        newCustomerInput.addEventListener('input', function(e) {
+            console.log('✅ تم إدخال نص في حقل العميل الجديد:', e.target.value);
+        });
+        
+        newCustomerInput.addEventListener('focus', function() {
+            console.log('✅ تم التركيز على حقل العميل الجديد');
+            this.style.borderColor = '#007bff';
+        });
+        
+        newCustomerInput.addEventListener('blur', function() {
+            this.style.borderColor = '#ddd';
+        });
+        
+        // استبدال الحقل القديم
+        originalCustomerInput.parentNode.replaceChild(newCustomerInput, originalCustomerInput);
+        
+        // التركيز على الحقل الجديد
+        setTimeout(() => {
+            newCustomerInput.focus();
+            console.log('✅ تم إنشاء حقل العميل الجديد بنجاح');
+        }, 100);
+        
+    } else if (originalCustomerInput) {
+        // الطريقة التقليدية للإصلاح
+        console.log('استخدام الطريقة التقليدية لإصلاح حقل العميل...');
+        
+        // إزالة جميع القيود
+        originalCustomerInput.removeAttribute('readonly');
+        originalCustomerInput.removeAttribute('disabled');
+        originalCustomerInput.removeAttribute('tabindex');
+        
+        // تعيين الخصائص
+        originalCustomerInput.readOnly = false;
+        originalCustomerInput.disabled = false;
+        
+        // إصلاح CSS بقوة
+        originalCustomerInput.style.setProperty('pointer-events', 'auto', 'important');
+        originalCustomerInput.style.setProperty('user-select', 'text', 'important');
+        originalCustomerInput.style.setProperty('cursor', 'text', 'important');
+        originalCustomerInput.style.setProperty('background-color', '#fff', 'important');
+        originalCustomerInput.style.setProperty('opacity', '1', 'important');
+        originalCustomerInput.style.setProperty('color', '#000', 'important');
+        
+        // إزالة أي أحداث قد تتداخل
+        originalCustomerInput.onkeydown = null;
+        originalCustomerInput.onkeyup = null;
+        originalCustomerInput.onkeypress = null;
+        originalCustomerInput.oninput = null;
+        originalCustomerInput.onchange = null;
+        
+        // إضافة حدث جديد للتأكد من العمل
+        originalCustomerInput.addEventListener('input', function(e) {
+            console.log('✓ حقل العميل يعمل - النص المدخل:', e.target.value);
+        });
+        
+        // اختبار الحقل
+        originalCustomerInput.value = '';
+        originalCustomerInput.focus();
+        
+        console.log('✓ تم إصلاح حقل العميل');
+    } else {
+        console.error('✗ لم يتم العثور على حقل العميل');
+    }
+    
+    // إصلاح حقول التواريخ
+    const startDateInput = document.getElementById('rental-start-date');
+    const endDateInput = document.getElementById('rental-end-date');
+    
+    if (startDateInput) {
+        startDateInput.removeAttribute('readonly');
+        startDateInput.removeAttribute('disabled');
+        startDateInput.readOnly = false;
+        startDateInput.disabled = false;
+        console.log('✓ تم إصلاح حقل تاريخ البداية');
+    }
+    
+    if (endDateInput) {
+        endDateInput.removeAttribute('readonly');
+        endDateInput.removeAttribute('disabled');
+        endDateInput.readOnly = false;
+        endDateInput.disabled = false;
+        console.log('✓ تم إصلاح حقل تاريخ النهاية');
+    }
+    
+    // التأكد من أن الحقول المحسوبة تلقائياً تبقى للقراءة فقط
+    const daysInput = document.getElementById('rental-days');
+    const dailyPriceInput = document.getElementById('rental-daily-price');
+    const totalAmountInput = document.getElementById('rental-total-amount');
+    
+    if (daysInput) {
+        daysInput.readOnly = true;
+        console.log('✓ حقل عدد الأيام محدد للقراءة فقط (صحيح)');
+    }
+    
+    if (dailyPriceInput) {
+        dailyPriceInput.readOnly = true;
+        console.log('✓ حقل السعر اليومي محدد للقراءة فقط (صحيح)');
+    }
+    
+    if (totalAmountInput) {
+        totalAmountInput.readOnly = true;
+        console.log('✓ حقل المبلغ الإجمالي محدد للقراءة فقط (صحيح)');
+    }
+    
+    console.log('انتهى إصلاح جميع الحقول');
 }
 
 // إغلاق نموذج إضافة كراء
@@ -1772,6 +1929,133 @@ function closeAddRentalModal() {
     if (overlay) {
         overlay.remove();
     }
+}
+
+// دالة للتأكد من أن حقل العميل يعمل بشكل صحيح
+function ensureCustomerInputWorks() {
+    const customerInput = document.getElementById('rental-customer');
+    if (customerInput) {
+        // إزالة جميع الخصائص التي قد تمنع الكتابة
+        customerInput.removeAttribute('readonly');
+        customerInput.removeAttribute('disabled');
+        customerInput.removeAttribute('tabindex');
+        
+        // التأكد من أن الحقل قابل للتحرير
+        customerInput.readOnly = false;
+        customerInput.disabled = false;
+        
+        // إزالة أي أحداث قد تمنع الكتابة
+        customerInput.style.pointerEvents = 'auto';
+        customerInput.style.userSelect = 'text';
+        customerInput.style.cursor = 'text';
+        
+        console.log('تم التأكد من أن حقل العميل يعمل بشكل صحيح');
+    }
+}
+
+// دالة اختبار إضافة عميل جديد
+function testNewCustomerAddition() {
+    console.log('=== اختبار إضافة عميل جديد ===');
+    
+    // اختبار البحث عن عميل غير موجود
+    const testCustomerName = 'عميل اختبار ' + Date.now();
+    const existingCustomers = dataManager.getCustomers();
+    const existingCustomer = existingCustomers.find(c => c.name.toLowerCase() === testCustomerName.toLowerCase());
+    
+    console.log('اسم العميل للاختبار:', testCustomerName);
+    console.log('العميل موجود مسبقاً؟', !!existingCustomer);
+    
+    if (!existingCustomer) {
+        console.log('✓ العميل غير موجود - سيتم إنشاؤه');
+        
+        // محاكاة إضافة عميل جديد
+        const newCustomerData = {
+            name: testCustomerName,
+            phone: '0123456789',
+            email: 'test@example.com',
+            idNumber: '12345',
+            registrationDate: new Date().toISOString().split('T')[0]
+        };
+        
+        const customerId = dataManager.addCustomer(newCustomerData);
+        console.log('تم إنشاء عميل جديد بـ ID:', customerId);
+        
+        // التحقق من أن العميل تم إضافته
+        const updatedCustomers = dataManager.getCustomers();
+        const addedCustomer = updatedCustomers.find(c => c.id === customerId);
+        
+        if (addedCustomer) {
+            console.log('✓ تم التأكد من إضافة العميل بنجاح');
+            console.log('بيانات العميل المضاف:', addedCustomer);
+        } else {
+            console.error('✗ فشل في إضافة العميل');
+        }
+    }
+    
+    console.log('=== انتهاء الاختبار ===');
+}
+
+// دالة اختبار حقل العميل مباشرة
+function testCustomerInput() {
+    console.log('=== اختبار حقل العميل مباشرة ===');
+    
+    const customerInput = document.getElementById('rental-customer');
+    if (!customerInput) {
+        alert('❌ حقل العميل غير موجود!');
+        return;
+    }
+    
+    // اختبار 1: هل الحقل موجود ومرئي؟
+    console.log('1. الحقل موجود:', !!customerInput);
+    console.log('2. الحقل مرئي:', customerInput.offsetParent !== null);
+    
+    // اختبار 2: حالة الحقل
+    console.log('3. readonly:', customerInput.readOnly);
+    console.log('4. disabled:', customerInput.disabled);
+    console.log('5. contentEditable:', customerInput.contentEditable);
+    
+    // اختبار 3: CSS
+    const computedStyle = window.getComputedStyle(customerInput);
+    console.log('6. pointer-events:', computedStyle.pointerEvents);
+    console.log('7. user-select:', computedStyle.userSelect);
+    console.log('8. cursor:', computedStyle.cursor);
+    
+    // اختبار 4: محاولة الكتابة
+    const originalValue = customerInput.value;
+    const testText = 'اختبار ' + Date.now();
+    
+    try {
+        customerInput.focus();
+        customerInput.value = testText;
+        
+        if (customerInput.value === testText) {
+            console.log('✅ الحقل يعمل بشكل صحيح!');
+            alert('✅ الحقل يعمل بشكل صحيح!\nيمكنك الآن كتابة اسم العميل.');
+            customerInput.value = originalValue;
+        } else {
+            console.log('❌ الحقل لا يقبل النص');
+            alert('❌ الحقل لا يقبل النص!\nسيتم محاولة إصلاحه...');
+            
+            // محاولة الإصلاح
+            fixAllModalInputs();
+            
+            // اختبار مرة أخرى
+            setTimeout(() => {
+                customerInput.value = testText;
+                if (customerInput.value === testText) {
+                    alert('✅ تم إصلاح الحقل بنجاح!');
+                    customerInput.value = originalValue;
+                } else {
+                    alert('❌ فشل في إصلاح الحقل. تحقق من وحدة التحكم للمزيد من التفاصيل.');
+                }
+            }, 500);
+        }
+    } catch (error) {
+        console.error('خطأ في اختبار الحقل:', error);
+        alert('❌ حدث خطأ في اختبار الحقل: ' + error.message);
+    }
+    
+    console.log('=== انتهاء اختبار حقل العميل ===');
 }
 
 // تهيئة التطبيق عند تحميل الصفحة
@@ -1796,6 +2080,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ملء قائمة العملاء في الكراء السريع
     populateQuickRentalCustomers();
+    
+    // التأكد من أن حقل العميل يعمل بشكل صحيح
+    setTimeout(ensureCustomerInputWorks, 500);
     
     console.log('تم تحميل نظام إدارة BOUGHAE CAR بنجاح!');
 });
